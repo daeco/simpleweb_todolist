@@ -1,7 +1,7 @@
 package com.leanne.edu.springboot;
 
-import com.leanne.edu.springboot.dao.UserDAO;
-import com.leanne.edu.springboot.model.User;
+import com.leanne.edu.springboot.dao.TodoDAO;
+import com.leanne.edu.springboot.model.Todo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,20 +13,21 @@ public class Application {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         SpringApplication.run(Application.class, args);
 
-        UserDAO dao = new UserDAO();
-        User user = new User();
-        user.setId("whatsup");
-        user.setName("갓준형");
-        user.setPassword("1234");
+        TodoDAO todoDAO = new TodoDAO();
+        Todo todo = new Todo();
+        todo.setWork("코딩하기");
 
-        dao.add(user);
+        todoDAO.add(todo);
+        Todo todo2 = todoDAO.get(1);
 
-        System.out.println(user.getId() + "등록 성공");
+        System.out.println(todo2.getId());
+        System.out.println(todo2.getWork());
+        System.out.println(todo2.getRegistration());
 
-        User user2 = dao.get(user.getId());
-        System.out.println(user2.getName());
-        System.out.println(user2.getPassword());
+        // 데이터 추가
+        todoDAO.add(todo2);
 
-        System.out.println(user2.getId() + "조회 성공");
+        // 데이터 수정
+        todoDAO.modify(1, "코딩 안하기", null);
     }
 }
