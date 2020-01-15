@@ -1,12 +1,15 @@
 package com.leanne.edu.springboot.controller;
 
 import com.leanne.edu.springboot.dao.TodoDAO;
+import com.leanne.edu.springboot.model.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.PostConstruct;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -28,6 +31,15 @@ public class MainController {
 
     @RequestMapping("/")
     public String index() {
+        List<Todo> todoList = new ArrayList<>();
+        try {
+            todoList = todoDAO.selectAll();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return "index";
     }
 }

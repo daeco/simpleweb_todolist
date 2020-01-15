@@ -1,7 +1,5 @@
 package com.leanne.edu.springboot;
 
-import com.leanne.edu.springboot.dao.TodoDAO;
-import com.leanne.edu.springboot.model.Todo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

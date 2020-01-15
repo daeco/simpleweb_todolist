@@ -32,8 +32,28 @@ public class TodoDAO {
     }
 
 
-    public List<Todo> selectAll() {
+    public List<Todo> selectAll() throws ClassNotFoundException, SQLException {
         List<Todo> todoList = new ArrayList<Todo>();
+        Class.forName("org.h2.Driver");
+        Connection c = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa", "");
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM todo");
+//        ps.setString(1,"N");
+
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()) {
+            Todo todo = new Todo();
+            todo.setId(rs.getInt("id"));
+            todo.setWork(rs.getString("work"));
+            todo.setRegistrationDate(rs.getDate("registration_date"));
+            todo.setModificationDate((rs.getDate("modification_date")));
+            todo.setCompleteYn((rs.getString("complete_yn")));
+            todo.setReference(rs.getString("reference"));
+            todoList.add(todo);
+        }
+
+        rs.close();
+        ps.close();
+        c.close();
         return todoList;
     }
 
@@ -57,8 +77,8 @@ public class TodoDAO {
             todo = new Todo();
             todo.setId(rs.getInt("id"));
             todo.setWork(rs.getString("work"));
-            todo.setRegistrationDate(rs.getDate("registration"));
-            todo.setModificationDate((rs.getDate("modify")));
+            todo.setRegistrationDate(rs.getDate("registration_date"));
+            todo.setModificationDate((rs.getDate("modification_date")));
             todo.setCompleteYn((rs.getString("complete_yn")));
             todo.setReference(rs.getString("reference"));
         }
@@ -89,8 +109,8 @@ public class TodoDAO {
         Todo todo = new Todo();
         todo.setId(rs.getInt("id"));
         todo.setWork(rs.getString("work"));
-        todo.setRegistrationDate(rs.getDate("registration"));
-        todo.setModificationDate((rs.getDate("modify")));
+        todo.setRegistrationDate(rs.getDate("registration_date"));
+        todo.setModificationDate((rs.getDate("modification_date")));
         todo.setCompleteYn((rs.getString("complete_yn")));
         todo.setReference(rs.getString("reference"));
 
@@ -112,8 +132,8 @@ public class TodoDAO {
         Todo todo = new Todo();
         todo.setId(rs.getInt("id"));
         todo.setWork(rs.getString("work"));
-        todo.setRegistrationDate(rs.getDate("registration"));
-        todo.setModificationDate((rs.getDate("modify")));
+        todo.setRegistrationDate(rs.getDate("registration_date"));
+        todo.setModificationDate((rs.getDate("modification_date")));
         todo.setCompleteYn((rs.getString("complete_yn")));
         todo.setReference(rs.getString("reference"));
 
@@ -135,8 +155,8 @@ public class TodoDAO {
         Todo todo = new Todo();
         todo.setId(rs.getInt("id"));
         todo.setWork(rs.getString("work"));
-        todo.setRegistrationDate(rs.getDate("registration"));
-        todo.setModificationDate((rs.getDate("modify")));
+        todo.setRegistrationDate(rs.getDate("registration_date"));
+        todo.setModificationDate((rs.getDate("modification_date")));
         todo.setCompleteYn((rs.getString("complete_yn")));
         todo.setReference(rs.getString("reference"));
 
