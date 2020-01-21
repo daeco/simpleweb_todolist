@@ -103,7 +103,8 @@
             </div>
             <div class="col-xl-7 col-lg-8 col-sm-10">
                 <!-- <div th:text="|  *{todo.registrationDate}|" class="pt-10 f-22 text-adaptive"> -->
-                	<span th:text="*{todo.work}" /> | <span th:text="*{todo.registrationDate}|" />
+                	<span th:text="|id: *{todo.id}|" /> | <span th:text="|할일: *{todo.work}|" /> | <span th:text="|등록일: *{todo.registrationDate}|" /> |
+                <span th:text="|참조: *{todo.reference}|" />
                 </div>
             </div>
         </div>
@@ -120,18 +121,18 @@
     <div class="container px-xl-0">
         <div class="row text-center text-sm-left">
             <div class="col-lg-5 col-md-6 col-sm-7">
-                <form class="pt-105 pb-100">
+                <form method="post" action="/add-work" class="pt-105 pb-100">
                     <h2 class="mb-45 small" data-aos-duration="600" data-aos="fade-down" data-aos-delay="0">New Todo</h2>
                     <div data-aos-duration="600" data-aos="fade-down" data-aos-delay="0">
                         <div class="mb-10 f-14 semibold text-uppercase sp-20">할 일</div>
-                        <input type="text" name="word" class="mb-25 w-full input lg border-gray focus-action-1 color-heading placeholder-gray text-center text-sm-left"  />
+                        <input type="text" id="work" name="work" class="mb-25 w-full input lg border-gray focus-action-1 color-heading placeholder-gray text-center text-sm-left"  />
                     </div>
                     <div data-aos-duration="600" data-aos="fade-down" data-aos-delay="0">
                         <div class="mb-10 f-14 semibold text-uppercase sp-20">참조</div>
-                        <input type="text" name="refer" class="mb-25 w-full input lg border-gray focus-action-1 color-heading placeholder-gray text-center text-sm-left"  />
+                        <input type="text" id="reference" name="reference" class="mb-25 w-full input lg border-gray focus-action-1 color-heading placeholder-gray text-center text-sm-left"  />
                     </div>
                     <div class="mt-25 d-flex flex-wrap align-items-center buttons" data-aos-duration="600" data-aos="fade-down" data-aos-delay="0">
-                        <button id="btn_reg" class="mr-20 mb-20 mb-xl-0 w-210 btn lg action-1">등록</button>
+                        <button type="submit" id="btn_reg" class="mr-20 mb-20 mb-xl-0 w-210 btn lg action-1">등록</button>
                     </div>
                 </form>
             </div>
@@ -203,12 +204,28 @@
 
 <script>
     $("document").ready(function() {
-        $("#btn_reg").click(addWork);
+<!--        $("#btn_reg").click(addWork);-->
     });
     
-    function addWork() {
-        alert("아직 준비 중입니다.");
-    };
+<!--    function addWork() {-->
+<!--        var name = $("#word").val();-->
+<!--        var refer = $("#refer").val();-->
+<!--        $.ajax({-->
+<!--          url: "add-work",-->
+<!--          data: {-->
+<!--            "name": name,-->
+<!--            "refer": refer-->
+<!--          },-->
+<!--          method: "POST",-->
+<!--          dataType: "json",-->
+<!--          success: function(result) {-->
+<!--            alert("성공");-->
+<!--          },-->
+<!--          error: function(result) {-->
+<!--            alert("실패");-->
+<!--          }-->
+<!--        });-->
+<!--    };-->
 
 </script>
 

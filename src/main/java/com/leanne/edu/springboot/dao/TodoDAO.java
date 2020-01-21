@@ -31,13 +31,43 @@ public class TodoDAO {
         c.close();
     }
 
+    public void insertTodo(Integer id, String work, String refer) throws ClassNotFoundException, SQLException {
+        Class.forName("org.h2.Driver");
+        Connection c = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa", "");
+        PreparedStatement ps = c.prepareStatement("INSERT INTO todo(id, work, registration_date, reference) values(?, ?, now(), ?)");
+        ps.setInt(1, id);
+        ps.setString(2, work);
+        ps.setString(3, refer);
 
+        ps.execute();
+
+        ps.close();
+        c.close();
+    }
+
+    public Integer selectNextTodoId() throws ClassNotFoundException, SQLException {
+        Class.forName("org.h2.Driver");
+        Connection c = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa", "");
+        PreparedStatement ps = c.prepareStatement("SELECT ifnull(max(id), 0) + 1 as id FROM todo");
+        ResultSet rs = ps.executeQuery();
+        Integer id = null;
+        if(rs.next()) {
+            id = rs.getInt("id");
+        }
+        return id;
+    }
+
+    /**
+     * 모든 todo list 조회
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public List<Todo> selectAll() throws ClassNotFoundException, SQLException {
         List<Todo> todoList = new ArrayList<Todo>();
         Class.forName("org.h2.Driver");
         Connection c = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa", "");
         PreparedStatement ps = c.prepareStatement("SELECT * FROM todo");
-//        ps.setString(1,"N");
 
         ResultSet rs = ps.executeQuery();
         while(rs.next()) {
