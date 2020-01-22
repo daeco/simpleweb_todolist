@@ -89,29 +89,31 @@
 </header>
 <!-- Testimonial 1 -->
 
-<section class="pt-80 pb-80 bg-light testimonial_1">
-    <div th:each="todo : ${todolist}" class="container px-xl-0">
-        <div class="row justify-content-center">
-            <div class="col-xl-10 col-lg-11" data-aos-duration="600" data-aos="fade-down" data-aos-delay="0">
-                <div class="hr bg-gray h-2"></div>
-            </div>
-        </div>
-        <div class="row pt-30 pb-50 inner" data-aos-duration="600" data-aos="fade-down" data-aos-delay="300">
-            <div class="col-xl-2 col-lg-1"></div>
-            <div class="col-md-1 col-sm-2">
-                <i class="fas fa-quote-left f-36 color-gray"></i>
-            </div>
-            <div class="col-xl-7 col-lg-8 col-sm-10">
-                <!-- <div th:text="|  *{todo.registrationDate}|" class="pt-10 f-22 text-adaptive"> -->
-                	<span th:text="|id: *{todo.id}|" /> | <span th:text="|할일: *{todo.work}|" /> | <span th:text="|등록일: *{todo.registrationDate}|" /> |
-                <span th:text="|참조: *{todo.reference}|" />
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-xl-10 col-lg-11" data-aos-duration="600" data-aos="fade-down" data-aos-delay="0">
-                <div class="hr bg-gray h-2"></div>
-            </div>
+<section class="pt-10 pb-80 bg-light testimonial_1">
+    <div class="container">
+        <div class="text-center">
+            <table class="table">
+                <thead>
+                <tr >
+                    <th scope="col" width="5%">ID</th>
+                    <th scope="col" width="40%">할일</th>
+                    <th scope="col" width="20%">참조</th>
+                    <th scope="col" width="15%">등록일</th>
+                    <th scope="col" width="15%">수정일</th>
+                    <th scope="col" width="5%">완료</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="todo : ${todolist}"    >
+                    <th th:text="*{todo.id}" scope="row"></th>
+                    <td th:text="*{todo.work}"></td>
+                    <td th:text="*{todo.reference}"></td>
+                    <td th:text="*{todo.registrationDate}"></td>
+                    <td th:text="*{todo.modificationDate}"></td>
+                    <td th:text="*{todo.completeYn}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </section>

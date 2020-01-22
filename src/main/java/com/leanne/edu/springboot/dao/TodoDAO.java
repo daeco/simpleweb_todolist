@@ -57,6 +57,32 @@ public class TodoDAO {
         return id;
     }
 
+    public List<Todo> selectTodoListJoinWorkReference() throws ClassNotFoundException, SQLException {
+        List<Todo> todoList = new ArrayList<Todo>();
+
+        Class.forName("org.h2.Driver");
+        Connection c = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa", "");
+        PreparedStatement ps = c.prepareStatement("select a.id, a.work, a.registration_date, a.modification_date, a.complete_yn, " +
+                "group_concat(b.to_id separator ', ') as reference from todo a left join work_ref b on a.id = b.from_id group by a.id order by id;");
+
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()) {
+            Todo todo = new Todo();
+            todo.setId(rs.getInt("id"));
+            todo.setWork(rs.getString("work"));
+            todo.setRegistrationDate(rs.getDate("registration_date"));
+            todo.setModificationDate((rs.getDate("modification_date")));
+            todo.setCompleteYn((rs.getString("complete_yn")));
+            todo.setReference(rs.getString("reference"));
+            todoList.add(todo);
+        }
+
+        rs.close();
+        ps.close();
+        c.close();
+        return todoList;
+    }
+
     /**
      * 모든 todo list 조회
      * @return

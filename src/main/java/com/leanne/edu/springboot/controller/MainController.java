@@ -44,7 +44,7 @@ public class MainController {
     public String index(Model model) {
         List<Todo> todoList = new ArrayList<>();
         try {
-            todoList = todoDAO.selectAll();
+            todoList = todoDAO.selectTodoListJoinWorkReference();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -62,7 +62,7 @@ public class MainController {
             Integer id = todoDAO.selectNextTodoId();
             if(id != null) {
                 todoDAO.insertTodo(id, work, null);
-                workReferenceDAO.insertReference(reference, id);
+                workReferenceDAO.insertReference(id, reference);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
