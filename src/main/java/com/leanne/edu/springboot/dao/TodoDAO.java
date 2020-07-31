@@ -31,13 +31,13 @@ public class TodoDAO {
         c.close();
     }
 
-    public void insertTodo(Integer id, String work, String refer) throws ClassNotFoundException, SQLException {
+    public void insertTodo(Integer id, String work, String referOrNull) throws ClassNotFoundException, SQLException {
         Class.forName("org.h2.Driver");
         Connection c = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa", "");
         PreparedStatement ps = c.prepareStatement("INSERT INTO todo(id, work, registration_date, reference) values(?, ?, now(), ?)");
         ps.setInt(1, id);
         ps.setString(2, work);
-        ps.setString(3, refer);
+        ps.setString(3, referOrNull);
 
         ps.execute();
 

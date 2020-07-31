@@ -34,6 +34,12 @@ public class MainController {
             todoDAO.insertTodo(4,"방청소", null);
             workReferenceDAO.insertReference(4, 1);
             workReferenceDAO.insertReference(4, 3);
+            todoDAO.insertTodo(5,"할일1", null);
+            todoDAO.insertTodo(6,"할일2", null);
+            todoDAO.insertTodo(7,"할일3", null);
+            todoDAO.insertTodo(8,"할일4", null);
+            todoDAO.insertTodo(9,"할일5", null);
+            todoDAO.insertTodo(10,"할일6", null);
         } catch (ClassNotFoundException | SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -62,7 +68,9 @@ public class MainController {
             Integer id = todoDAO.selectNextTodoId();
             if(id != null) {
                 todoDAO.insertTodo(id, work, null);
-                workReferenceDAO.insertReference(id, reference);
+                if(reference != null) {
+                    workReferenceDAO.insertReference(id, reference);
+                }
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -71,4 +79,6 @@ public class MainController {
         }
         return "redirect:/home";
     }
+
+
 }
