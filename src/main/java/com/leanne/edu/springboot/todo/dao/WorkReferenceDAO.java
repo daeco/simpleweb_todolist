@@ -1,4 +1,4 @@
-package com.leanne.edu.springboot.dao;
+package com.leanne.edu.springboot.todo.dao;
 
 import org.springframework.stereotype.Repository;
 
